@@ -33,7 +33,7 @@ resource "aws_lambda_permission" "api_gw" {
 
 ####################################cognito#############################
 resource "aws_apigatewayv2_authorizer" "cognito" {
-  api_id = aws_apigatewayv2_api.this.id
+  api_id = aws_apigatewayv2_api.http_api.id
   authorizer_type = "JWT"
   identity_sources = ["$request.header.Authorization"]
   name = "cognito-authorizer"
@@ -44,7 +44,7 @@ resource "aws_apigatewayv2_authorizer" "cognito" {
 }
 
 resource "aws_apigatewayv2_route" "secure" {
-  api_id    = aws_apigatewayv2_api.this.id
+  api_id    = aws_apigatewayv2_api.http_api.id
   route_key = "GET /"
   target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
   authorization_type = "JWT"
