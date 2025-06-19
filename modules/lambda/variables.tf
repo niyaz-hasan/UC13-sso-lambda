@@ -3,17 +3,5 @@ variable "lambda_name" {
   type        = string
 }
 
-variable "security_group_ids" {
-  description = "security_group id"
-  type        = list(string)
+variable "lambda_zip" {
 }
-
-variable "subnet_ids" {
-  description = "subnet_ids"
-  type        = list(string)
-}
-
-variable "lambda_image_uri" {
-    description = "lambda_image_uri"
-    type        = string
-    }
