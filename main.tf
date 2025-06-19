@@ -12,7 +12,7 @@ module "lambda" {
 }
 
 module "cognito" {
-  source       = "../modules/cognito"
+  source       = "./modules/cognito"
   name         = "hello-auth"
   callback_url = "https://${module.api_gateway.api_endpoint}/"
 }
