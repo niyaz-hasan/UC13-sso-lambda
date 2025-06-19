@@ -31,6 +31,25 @@ resource "aws_lambda_permission" "api_gw" {
   source_arn    = "${aws_apigatewayv2_api.http_api.execution_arn}/*/*"
 }
 
+####################################cognito#############################
+resource "aws_apigatewayv2_authorizer" "cognito" {
+  api_id = aws_apigatewayv2_api.this.id
+  authorizer_type = "JWT"
+  identity_sources = ["$request.header.Authorization"]
+  name = "cognito-authorizer"
+  jwt_configuration {
+    audience = [var.cognito_client_id]
+    issuer = "https://${var.cognito_user_pool_endpoint}"
+  }
+}
+
+resource "aws_apigatewayv2_route" "secure" {
+  api_id    = aws_apigatewayv2_api.this.id
+  route_key = "GET /"
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+  authorization_type = "JWT"
+  authorizer_id      = aws_apigatewayv2_authorizer.cognito.id
+}
 
 output "api_endpoint" {
   value = aws_apigatewayv2_api.http_api.api_endpoint

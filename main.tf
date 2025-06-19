@@ -11,8 +11,17 @@ module "lambda" {
   lambda_name         = var.lambda_function_name
 }
 
+module "cognito" {
+  source       = "../modules/cognito"
+  name         = "hello-auth"
+  callback_url = "https://${module.api_gateway.api_endpoint}/"
+}
+
 module "api_gateway" {
   source          = "./modules/api_gateway"
   lambda_function_name = module.lambda.lambda_function_name
   lambda_arn     = module.lambda.lambda_arn
+  cognito_client_id        = module.cognito.client_id
+  cognito_user_pool_endpoint = module.cognito.user_pool_endpoint
 }
+
