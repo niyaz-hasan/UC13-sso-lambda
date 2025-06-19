@@ -1,2 +1,2 @@
-# UC7-lambda-apigateway
-Create terraform by lambda, api-gateway,ECR
+# UC13-sso-lambda
+create lambda api-gateway sso by using terraform 
