@@ -23,6 +23,6 @@ module "api_gateway" {
   lambda_function_name = module.lambda.lambda_function_name
   lambda_arn     = module.lambda.lambda_arn
   cognito_client_id        = module.cognito.client_id
-  cognito_user_pool_endpoint = module.cognito.user_pool_endpoint
+  cognito_user_pool_endpoint = module.cognito.user_pool_arn
 }
 
