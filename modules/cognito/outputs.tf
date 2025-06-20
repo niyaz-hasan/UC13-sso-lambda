@@ -11,5 +11,5 @@ output "client_id" {
 #}
 
 output "user_pool_endpoint" {
-  value = aws_cognito_user_pool.endpoint 
+  value = aws_cognito_user_pool.this.endpoint 
 }
