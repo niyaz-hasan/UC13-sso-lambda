@@ -14,7 +14,7 @@ module "lambda" {
 module "cognito" {
   source       = "./modules/cognito"
   name         = "hello-auth"
-  callback_url = "https://${module.api_gateway.api_endpoint}/"
+  callback_url = module.api_gateway.api_endpoint
   region       = var.region
 }
 
