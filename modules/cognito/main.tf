@@ -11,6 +11,12 @@ resource "aws_cognito_user_pool_client" "client" {
   allowed_oauth_scopes = ["email", "openid", "profile"]
   allowed_oauth_flows_user_pool_client = true
   supported_identity_providers = ["COGNITO"]
+  
+  explicit_auth_flows = [
+    "ALLOW_ADMIN_USER_PASSWORD_AUTH",
+    "ALLOW_USER_PASSWORD_AUTH",
+    "ALLOW_REFRESH_TOKEN_AUTH"
+  ]
 }
 
 resource "aws_cognito_user_pool_domain" "this" {
