@@ -12,3 +12,13 @@ resource "aws_cognito_user_pool_client" "client" {
   allowed_oauth_flows_user_pool_client = true
   supported_identity_providers = ["COGNITO"]
 }
+
+resource "aws_cognito_user_pool_domain" "this" {
+  domain       = "demo-auth-domain-${random_string.suffix.result}"
+  user_pool_id = aws_cognito_user_pool.this.id
+}
+
+resource "random_string" "suffix" {
+  length  = 6
+  special = false
+}
